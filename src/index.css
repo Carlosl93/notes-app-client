@@ -26,6 +26,11 @@ input[type="file"] {
   width: 100%;
 }
 
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 git code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

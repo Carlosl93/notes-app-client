@@ -1,23 +1,34 @@
 import React from "react";
-import "./App.css";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import Routes from "./Routes";
+import { colors as c } from "./styles/color";
+
+const AppContainer = styled.div`
+  height: 100%;
+  margin: 60px 60px 0 60px;
+`;
+
+const Navbar = styled.div`
+  align-items: center;
+  background-color: ${c.gray.light};
+  border: 1px solid ${c.gray.medium};
+  border-radius: 5px;
+  display: flex;
+  height: 50px;
+  padding: 10px 20px;
+  width: 100%;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <Navbar>
+        <Link to="/">Scratch</Link>
+      </Navbar>
+      <Routes />
+    </AppContainer>
   );
 }
 
