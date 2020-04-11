@@ -17,7 +17,16 @@ h6 {
   font-family: "PT Serif", serif;
 }
 
-code {
+select.form-control,
+textarea.form-control,
+input.form-control {
+  font-size: 16px;
+}
+input[type="file"] {
+  width: 100%;
+}
+
+git code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
