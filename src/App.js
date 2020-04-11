@@ -17,8 +17,17 @@ const Navbar = styled.div`
   border-radius: 5px;
   display: flex;
   height: 50px;
+  justify-content: space-between;
   padding: 10px 20px;
   width: 100%;
+`;
+
+const LinksContainer = styled.div`
+  align-item: flex-end;
+
+  a {
+    margin-left: 10px;
+  }
 `;
 
 function App() {
@@ -26,6 +35,10 @@ function App() {
     <AppContainer>
       <Navbar>
         <Link to="/">Scratch</Link>
+        <LinksContainer>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
+        </LinksContainer>
       </Navbar>
       <Routes />
     </AppContainer>
