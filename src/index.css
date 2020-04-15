@@ -26,6 +26,10 @@ input[type="file"] {
   width: 100%;
 }
 
+input:focus {
+  outline: 0;
+}
+
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
