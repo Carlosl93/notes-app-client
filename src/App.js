@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Auth } from "aws-amplify";
 
 import Routes from "./Routes";
 import { colors as c } from "./styles/color";
@@ -33,30 +34,50 @@ const LinksContainer = styled.div`
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    } catch (e) {
+      if (e !== "No curent user") {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
 
   const handleLogout = useCallback(() => userHasAuthenticated(false), [
     userHasAuthenticated
   ]);
 
   return (
-    <AppContainer>
-      <Navbar>
-        <Link to="/">Scratch</Link>
-        {isAuthenticated ? (
-          <LinksContainer>
-            <button onClick={handleLogout}>Logout</button>
-          </LinksContainer>
-        ) : (
-          <LinksContainer>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
-          </LinksContainer>
-        )}
-      </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-        <Routes />
-      </AppContext.Provider>
-    </AppContainer>
+    isAuthenticating && (
+      <AppContainer>
+        <Navbar>
+          <Link to="/">Scratch</Link>
+          {isAuthenticated ? (
+            <LinksContainer>
+              <button onClick={handleLogout}>Logout</button>
+            </LinksContainer>
+          ) : (
+            <LinksContainer>
+              <Link to="/signup">Signup</Link>
+              <Link to="/login">Login</Link>
+            </LinksContainer>
+          )}
+        </Navbar>
+        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <Routes />
+        </AppContext.Provider>
+      </AppContainer>
+    )
   );
 }
 
