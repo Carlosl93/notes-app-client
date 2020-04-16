@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Auth } from "aws-amplify";
 
@@ -36,6 +36,8 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
+  const history = useHistory();
+
   useEffect(() => {
     onLoad();
   }, []);
@@ -50,12 +52,15 @@ function App() {
       }
     }
 
-    setIsAuthenticating(false);
+    setIsAuthenticating(true);
   }
 
-  const handleLogout = useCallback(() => userHasAuthenticated(false), [
-    userHasAuthenticated
-  ]);
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+
+    userHasAuthenticated(false);
+    history.push("/login");
+  }, [userHasAuthenticated, history]);
 
   return (
     isAuthenticating && (

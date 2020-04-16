@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 
 import InputField from "../InputField";
-import { colors as c } from "../../styles/color";
 import { useAppContext } from "../../libs/contextLib";
+import LoaderButton from "../../components/LoaderButton";
+import { SubmitButton } from "../../styles/buttons";
 
 import { FIELDS, initialValues } from "./constants";
 
@@ -16,21 +18,21 @@ const LoginContainer = styled.div`
   margin-top: 60px;
 `;
 
-const LoginButton = styled.button`
-  background: none;
-  border: 1px solid ${c.gray.medium};
-  border-radius: 5px;
-  height: 35px;
-  margin-top: 10px;
-  width: 300px;
-`;
-
 export default function Login() {
+  const history = useHistory();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const { userHasAuthenticated } = useAppContext();
+
   const handleSubmitForm = async ({ email, password }) => {
+    setIsLoading(true);
+
     try {
       await Auth.signIn(email, password);
+
       userHasAuthenticated(true);
+      history.push("/");
     } catch {
       alert("error");
     }
@@ -59,7 +61,9 @@ export default function Login() {
           handleChange={handleChange}
           label="Password"
         />
-        <LoginButton type="submit">Login</LoginButton>
+        <LoaderButton isLoading={isLoading}>
+          <SubmitButton type="submit">Login</SubmitButton>
+        </LoaderButton>
       </form>
     </LoginContainer>
   );
