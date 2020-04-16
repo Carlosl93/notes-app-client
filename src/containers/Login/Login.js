@@ -1,9 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
+import { Auth } from "aws-amplify";
 
 import InputField from "../InputField";
 import { colors as c } from "../../styles/color";
+import { useAppContext } from "../../libs/contextLib";
 
 import { FIELDS, initialValues } from "./constants";
 
@@ -24,8 +26,14 @@ const LoginButton = styled.button`
 `;
 
 export default function Login() {
-  const handleSubmitForm = values => {
-    console.log("values", values);
+  const { userHasAuthenticated } = useAppContext();
+  const handleSubmitForm = async ({ email, password }) => {
+    try {
+      await Auth.signIn(email, password);
+      userHasAuthenticated(true);
+    } catch {
+      alert("error");
+    }
   };
 
   const { values, handleChange, handleSubmit } = useFormik({

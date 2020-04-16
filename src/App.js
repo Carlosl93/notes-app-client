@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Routes from "./Routes";
 import { colors as c } from "./styles/color";
+import { AppContext } from "./libs/contextLib";
 
 const AppContainer = styled.div`
   height: 100%;
@@ -31,16 +32,30 @@ const LinksContainer = styled.div`
 `;
 
 function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  const handleLogout = useCallback(() => userHasAuthenticated(false), [
+    userHasAuthenticated
+  ]);
+
   return (
     <AppContainer>
       <Navbar>
         <Link to="/">Scratch</Link>
-        <LinksContainer>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-        </LinksContainer>
+        {isAuthenticated ? (
+          <LinksContainer>
+            <button onClick={handleLogout}>Logout</button>
+          </LinksContainer>
+        ) : (
+          <LinksContainer>
+            <Link to="/signup">Signup</Link>
+            <Link to="/login">Login</Link>
+          </LinksContainer>
+        )}
       </Navbar>
-      <Routes />
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+        <Routes />
+      </AppContext.Provider>
     </AppContainer>
   );
 }
