@@ -6,6 +6,7 @@ import { Auth } from "aws-amplify";
 import Routes from "./Routes";
 import { colors as c } from "./styles/color";
 import { AppContext } from "./libs/contextLib";
+import { onError } from "./libs/errorLib";
 
 const AppContainer = styled.div`
   height: 100%;
@@ -48,7 +49,7 @@ function App() {
       userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No curent user") {
-        alert(e);
+        onError(e);
       }
     }
 

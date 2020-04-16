@@ -5,9 +5,10 @@ import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 
 import InputField from "../InputField";
-import { useAppContext } from "../../libs/contextLib";
 import LoaderButton from "../../components/LoaderButton";
 import { SubmitButton } from "../../styles/buttons";
+import { useAppContext } from "../../libs/contextLib";
+import { onError } from "../../libs/errorLib";
 
 import { FIELDS, initialValues } from "./constants";
 
@@ -33,8 +34,8 @@ export default function Login() {
 
       userHasAuthenticated(true);
       history.push("/");
-    } catch {
-      alert("error");
+    } catch (e) {
+      onError(e);
     }
   };
 
