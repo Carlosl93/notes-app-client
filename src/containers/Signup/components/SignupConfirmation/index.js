@@ -19,11 +19,24 @@ const LoginContainer = styled.div`
   margin-top: 60px;
 `;
 
-export default function SignupConfirmation() {
+export default function SignupConfirmation({ newUser }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmitForm = async ({ email, password }) => {
+  const history = useHistory();
+  const { userHasAuthenticated } = useAppContext();
+
+  const handleSubmitForm = async ({ verificationCode }) => {
     setIsLoading(true);
+
+    try {
+      await Auth.confirmSignUp(newUser.user?.username, verificationCode);
+
+      userHasAuthenticated(true);
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
+    }
   };
 
   const { values, handleChange, handleSubmit } = useFormik({
@@ -37,8 +50,8 @@ export default function SignupConfirmation() {
       <form onSubmit={handleSubmit}>
         <InputField
           type="text"
-          name={FIELDS.EMAIL_FIELD}
-          value={values[FIELDS.EMAIL_FIELD]}
+          name={FIELDS.VERIFICATION_CODE}
+          value={values[FIELDS.VERIFICATION_CODE]}
           handleChange={handleChange}
           label="Verification Code"
         />

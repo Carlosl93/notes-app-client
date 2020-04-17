@@ -1,5 +1,5 @@
 export const FIELDS = {
-  VERIFICATION_CODE: "email"
+  VERIFICATION_CODE: "verificationCode"
 };
 
 export const initialValues = {

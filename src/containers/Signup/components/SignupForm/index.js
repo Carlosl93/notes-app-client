@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import { Auth } from "aws-amplify";
-import { useHistory } from "react-router-dom";
 
 import InputField from "../../../InputField";
 import LoaderButton from "../../../../components/LoaderButton";
 import { SubmitButton } from "../../../../styles/buttons";
-import { useAppContext } from "../../../../libs/contextLib";
 import { onError } from "../../../../libs/errorLib";
 
 import { FIELDS, initialValues } from "./constants";
@@ -25,7 +23,17 @@ export default function SignupForm({ setNewUser }) {
   const handleSubmitForm = async ({ email, password }) => {
     setIsLoading(true);
 
-    setNewUser("test");
+    try {
+      const newUser = await Auth.signUp({
+        username: email,
+        password: password
+      });
+      setIsLoading(false);
+      setNewUser(newUser);
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
+    }
 
     setIsLoading(false);
   };
