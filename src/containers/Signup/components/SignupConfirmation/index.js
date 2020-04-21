@@ -12,7 +12,7 @@ import { onError } from "../../../../libs/errorLib";
 
 import { FIELDS, initialValues } from "./constants";
 
-const LoginContainer = styled.div`
+const SignupContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ export default function SignupConfirmation({ newUser }) {
   });
 
   return (
-    <LoginContainer>
+    <SignupContainer>
       <form onSubmit={handleSubmit}>
         <InputField
           type="text"
@@ -59,6 +59,6 @@ export default function SignupConfirmation({ newUser }) {
           <SubmitButton type="submit">Verify</SubmitButton>
         </LoaderButton>
       </form>
-    </LoginContainer>
+    </SignupContainer>
   );
 }

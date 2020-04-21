@@ -15,7 +15,6 @@ const AppContainer = styled.div`
 
 const Navbar = styled.div`
   align-items: center;
-  background-color: ${c.gray.light};
   border: 1px solid ${c.gray.medium};
   border-radius: 5px;
   display: flex;

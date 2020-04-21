@@ -37,6 +37,8 @@ export default function Login() {
     } catch (e) {
       onError(e);
     }
+
+    setIsLoading(false);
   };
 
   const { values, handleChange, handleSubmit } = useFormik({
