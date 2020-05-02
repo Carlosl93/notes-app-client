@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import styled from "styled-components";
 import { Auth } from "aws-amplify";
 
-import InputField from "../../../InputField";
+import InputField from "../../../../components/InputField";
 import LoaderButton from "../../../../components/LoaderButton";
 import { SubmitButton } from "../../../../styles/buttons";
 import { onError } from "../../../../libs/errorLib";

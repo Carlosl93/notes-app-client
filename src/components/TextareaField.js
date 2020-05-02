@@ -17,6 +17,13 @@ const InputContainer = styled.div`
   }
 `;
 
+const TextArea = styled.textarea`
+  border: 1px solid ${c.gray.dark};
+  border-radius: 5px;
+  padding: 5px;
+  white-space: normal;
+`;
+
 export default function TextareaField({
   name,
   type,
@@ -27,8 +34,9 @@ export default function TextareaField({
   return (
     <InputContainer>
       <label>{label}</label>
-      <input
-        type="textfield"
+      <TextArea
+        cols="60"
+        rows="10"
         name={name}
         value={value}
         onChange={handleChange}

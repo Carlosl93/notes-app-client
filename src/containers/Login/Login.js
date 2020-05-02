@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 
-import InputField from "../InputField";
+import InputField from "../../components/InputField";
 import LoaderButton from "../../components/LoaderButton";
 import { SubmitButton } from "../../styles/buttons";
 import { useAppContext } from "../../libs/contextLib";

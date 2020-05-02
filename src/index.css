@@ -17,6 +17,21 @@ h6 {
   font-family: "PT Serif", serif;
 }
 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
 select.form-control,
 textarea.form-control,
 input.form-control {

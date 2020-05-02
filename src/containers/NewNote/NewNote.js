@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
-import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 
-import TextareaField from "../TextareaField";
+import { createNote } from "../../services/notes";
+import TextareaField from "../../components/TextareaField";
 import LoaderButton from "../../components/LoaderButton";
 import { SubmitButton } from "../../styles/buttons";
-import { useAppContext } from "../../libs/contextLib";
 import { onError } from "../../libs/errorLib";
 
 import { FIELDS, initialValues } from "./constants";
@@ -22,9 +21,19 @@ const NotesContainer = styled.form`
 
 export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
-  const handleSubmitForm = async ({ email, password }) => {
+  const handleSubmitForm = async ({ note }) => {
     setIsLoading(true);
+
+    try {
+      await createNote({ content: note });
+      history.push("/");
+    } catch (e) {
+      onError(e);
+    }
+
+    setIsLoading(false);
   };
 
   const { values, handleChange, handleSubmit } = useFormik({
