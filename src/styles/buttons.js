@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 import { colors as c } from "./color";
 
-const buttonTransitionIn = "border 0.3s ease";
-const buttonTransitionOut = "border 0.6s ease";
+export const buttonTransitionIn = "border 0.3s ease";
+export const buttonTransitionOut = "border 0.6s ease";
 
 export const SubmitButton = styled.button`
   background: none;

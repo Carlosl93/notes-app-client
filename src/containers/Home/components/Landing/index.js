@@ -14,11 +14,11 @@ const HomeContainer = styled.div`
   }
 `;
 
-export default function Home() {
-  return (
-    <HomeContainer>
-      <h1>Scratch</h1>
-      <p>Scratch</p>
-    </HomeContainer>
-  );
-}
+const Landing = () => (
+  <HomeContainer>
+    <h1>Scratch</h1>
+    <p>Scratch</p>
+  </HomeContainer>
+);
+
+export default Landing;

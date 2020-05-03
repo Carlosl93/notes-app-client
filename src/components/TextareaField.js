@@ -7,21 +7,16 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-
-  input {
-    border: 1px solid ${c.gray.dark};
-    border-radius: 5px;
-    height: 200px;
-    padding: 0 5px;
-    width: 500px;
-  }
+  width: 100%;
 `;
 
 const TextArea = styled.textarea`
   border: 1px solid ${c.gray.dark};
   border-radius: 5px;
   padding: 5px;
+  min-height: 200px;
   white-space: normal;
+  width: 100%;
 `;
 
 export default function TextareaField({
@@ -34,13 +29,7 @@ export default function TextareaField({
   return (
     <InputContainer>
       <label>{label}</label>
-      <TextArea
-        cols="60"
-        rows="10"
-        name={name}
-        value={value}
-        onChange={handleChange}
-      />
+      <TextArea name={name} value={value} onChange={handleChange} />
     </InputContainer>
   );
 }
