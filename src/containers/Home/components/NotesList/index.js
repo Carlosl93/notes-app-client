@@ -13,10 +13,12 @@ import Note from "./components/Note";
 
 const NotesListContainer = styled.div`
   margin-top: 60px;
-  width: 100%;
 
   h1 {
-    font-weight: 600;
+    background-color: white;
+    font-weight: 100;
+    filter: invert(100%);
+    padding: 2px 4px;
   }
 `;
 
@@ -55,6 +57,7 @@ const NotesList = () => {
         const notes = await loadNotes();
         setNotes(notes);
       } catch (e) {
+        console.log("e", e);
         onError(e);
       }
     }

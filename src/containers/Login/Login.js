@@ -28,6 +28,8 @@ export default function Login() {
 
   const handleSubmitForm = async ({ email, password }) => {
     setIsLoading(true);
+    console.log("email", email);
+    console.log("password", password);
 
     try {
       await Auth.signIn(email, password);

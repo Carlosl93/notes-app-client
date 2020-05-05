@@ -39,21 +39,24 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    console.log("yo");
     onLoad();
   }, []);
 
-  async function onLoad() {
+  const onLoad = async () => {
     try {
-      await Auth.currentSession();
+      const currentSession = await Auth.currentSession();
+      console.log("hey", currentSession);
       userHasAuthenticated(true);
     } catch (e) {
-      if (e !== "No curent user") {
+      console.log("e", e);
+      if (e !== "No current user") {
         onError(e);
       }
     }
 
     setIsAuthenticating(true);
-  }
+  };
 
   const handleLogout = useCallback(async () => {
     await Auth.signOut();
