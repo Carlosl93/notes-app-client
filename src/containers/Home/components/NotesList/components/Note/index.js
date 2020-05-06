@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import {
-  buttonTransitionOut,
-  buttonTransitionIn
-} from "../../../../../../styles/buttons";
 import { colors as c } from "../../../../../../styles/color";
 
 const NoteContainer = styled.div`
@@ -14,7 +10,6 @@ const NoteContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-  width: 100%;
 
   h4 {
     font-weight: 900;

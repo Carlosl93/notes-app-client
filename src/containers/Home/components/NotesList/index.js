@@ -15,15 +15,14 @@ const NotesListContainer = styled.div`
   margin-top: 60px;
 
   h1 {
-    background-color: white;
     font-weight: 100;
-    filter: invert(100%);
-    padding: 2px 4px;
+    letter-spacing: -3px;
+    padding: 4px 8px;
   }
 `;
 
 const Notes = styled.div`
-  margin-top: 30px;
+  margin-top: 1s0px;
   width: 100%;
 `;
 
